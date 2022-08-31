@@ -2,8 +2,9 @@ const inquirer = require('inquirer');
 
 
  const fs = require('fs');
-
- const generateMarkdown = require('./utils/generateMarkdown.js');
+ const util =require('util');
+ //const generateMarkdown = require('./utils/generateMarkdown.js');
+ const writeFileAsync = util.promisify(fs.writeFile);
 
 
 
@@ -185,20 +186,80 @@ const promptUser =() => {
 
     ])}
 
-    promptUser().then(answers => console.log(answers))
+    function generateMarkdown(answers) {
+        return `![GitHub last commit](https://img.shields.io/github/last-commit/${answers.github}/${answers.projectName})  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/${answers.github}/${answers.projectName})  ![GitHub watchers](https://img.shields.io/github/watchers/${answers.github}/${answers.projectName}?label=Watch&style=social)  ![GitHub top language](https://img.shields.io/github/languages/top/${answers.github}/${answers.projectName})  ![GitHub license](https://img.shields.io/badge/license-${answers.license}-blueviolet) <br> 
+    # ${answers.Title}
+        
+    ## Table of Contents 
+    1. [About the Project](#About-The-Project)
+    1. [Project Links](#Project-Links)
+    1. [Demo](#Demo)
+    1. [Getting Started](#Getting-Started)
+    1. [Installation](#Installation)
+    1. [Usage](#Usage)
+    1. [Tests](#Tests)
+    1. [Contribution Guidelines](#Contribution-Guidelines)
+    1. [Project Team](#Project-Team)
+    1. [Questions](#Questions)
+    1. [License](#License)
+        
+    ## About The Project
+    ${answers.description}
+        
+    // ## Project Links
+    // [Repo Link](https://github.com/${answers.username}/${answers.Title}) <br>
+    // [GitHub Project Link](https://${answers.link}.github.io/${answers.Title}/)
+        
 
-    .then (answers => {
-        const pageHTML=generateMarkdown(answers);
+        
+    ## Getting Started
+        
+    #### Languages and libraries used in this project (separate with commas):
+    ${answers.languages}
+        
+    #### Installation: 
+    \`\`\`  
+    ${answers.installation}
+    \`\`\`
+    #### Usage:
+    \`\`\`  
+    ${answers.usage}
+    \`\`\`
+    #### Tests:
+    \`\`\`  
+    ${answers.tests}
+    \`\`\`
+    #### Contributions:
+    \`\`\`  
+    ${answers.contributions}
+    \`\`\`
+        
+    ## Project Team
+    [${answers.username}](${answers.link}) <br>
+    ## Questions
+        
+    ## License
+    #### Distributed under the ${answers.license} License. See [Choose A License](https://choosealicense.com/) for more information.;)
+   
+    `;
+}
+    
+
+
+    //promptUser().then(answers => console.log(answers))
+
+    //.then (answers => {
+        //const pageHTML=generateMarkdown(answers);
  
  
  
-        fs.writeFile('./index.html', pageHTML, err => {
+    //     fs.writeFile('./index.html', pageHTML, err => {
  
-         if (err) throw new Error (err);
+    //      if (err) throw new Error (err);
  
-            console.log('Portfolio complete! Check out index.html to see the output');
-      });
-     });
+    //         console.log('Portfolio complete! Check out index.html to see the output');
+    //   });
+    //  });
 
 const profileDataArgs = process.argv.slice(2, process.argv.length);
 console.log(profileDataArgs);
@@ -212,13 +273,30 @@ const questions = [];
 function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
-function init() {}
+//function init() {}
+const init = async () => {
+    console.log('Hi! Create your README!');
+    try {
+        const answers = await promptUser();
 
-// Function call to initialize app
+        const finalFile = generateMarkdown(answers);
+        if (answers.license === "Other") {
+            console.log("You entered 'Other' for your project license, you may add a license once your file is generated.");
+        }
+        // function to write README file
+        await writeFileAsync('myREADME.md', finalFile);
+
+        console.log('Yay! Your README successfully wrote to myREADME.md');
+    } catch (err) {
+        console.log('Ooops, an error has occurred');
+    }
+};
+// function call to initialize program
 init();
+
 
 const printProfileData = (profileDataArr) => {
     console.log(profileDataArr);
   };
   
-  printProfileData(profileDataArgs);
+  printProfileData(profileDataArgs)
