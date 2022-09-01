@@ -187,7 +187,7 @@ const promptUser =() => {
     ])}
 
     function generateMarkdown(answers) {
-        return `![GitHub last commit](https://img.shields.io/github/last-commit/${answers.github}/${answers.projectName})  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/${answers.github}/${answers.projectName})  ![GitHub watchers](https://img.shields.io/github/watchers/${answers.github}/${answers.projectName}?label=Watch&style=social)  ![GitHub top language](https://img.shields.io/github/languages/top/${answers.github}/${answers.projectName})  ![GitHub license](https://img.shields.io/badge/license-${answers.license}-blueviolet) <br> 
+        return `${answers.github}/${answers.projectName})  
     # ${answers.Title}
         
     ## Table of Contents 
@@ -239,7 +239,7 @@ const promptUser =() => {
     ## Questions
         
     ## License
-    #### Distributed under the ${answers.license} License. See [Choose A License](https://choosealicense.com/) for more information.;)
+    #### Distributed under the ${answers.license} License. 
    
     `;
 }
