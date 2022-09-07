@@ -18,7 +18,7 @@
 This application was created to generate several questions that the user can answer to automatically generate a ReadME for their projects.
         
 // ## Project Links
-// [Repo Link](https://github.com/asaelens02/Professional ReadME Generator) <br>
+// [Repo Link] https://github.com/asaelens02/AKS-Readme-Generator<br>
 // [GitHub Project Link]https://asaelens02.github.io/AKS-Readme-Generator/
         
 
