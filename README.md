@@ -25,7 +25,7 @@ This application was created to generate several questions that the user can ans
         
             
 #### Languages and libraries used in this project (separate with commas):
-undefined
+JavaScript, Node.js 
         
 #### Installation: 
     ```  
