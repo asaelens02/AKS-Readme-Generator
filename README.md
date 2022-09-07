@@ -19,7 +19,7 @@ This application was created to generate several questions that the user can ans
         
 // ## Project Links
 // [Repo Link](https://github.com/asaelens02/Professional ReadME Generator) <br>
-// [GitHub Project Link](https://https://asaelens02.github.io/AKS-Readme-Generator/.github.io/none/.github.io/Professional ReadME Generator/)
+// [GitHub Project Link]https://asaelens02.github.io/AKS-Readme-Generator/
         
 
         
